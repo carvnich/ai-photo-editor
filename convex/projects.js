@@ -120,8 +120,8 @@ export const updateProject = mutation({
 	args: {
 		projectId: v.id("projects"),
 		canvasState: v.optional(v.any()),
-		width: v.optional(v.number()), // ← Add this
-		height: v.optional(v.number()), // ← Add this
+		width: v.optional(v.number()),
+		height: v.optional(v.number()),
 		currentImageUrl: v.optional(v.string()),
 		thumbnailUrl: v.optional(v.string()),
 		activeTransformations: v.optional(v.string()),

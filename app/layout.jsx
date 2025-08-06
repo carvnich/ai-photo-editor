@@ -23,17 +23,12 @@ export default function RootLayout({ children }) {
 			</head>
 			<body className={`${inter.className}`}>
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-					<ClerkProvider
-						publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
-						appearance={{
-							baseTheme: shadesOfPurple,
-						}}>
+					<ClerkProvider publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY} appearance={{ baseTheme: shadesOfPurple }}>
 						<ConvexClientProvider>
 							<Header />
 							<main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
 								<FloatingShapes />
 								<Toaster richColors />
-
 								{children}
 							</main>
 						</ConvexClientProvider>

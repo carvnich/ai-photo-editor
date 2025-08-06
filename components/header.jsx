@@ -36,9 +36,6 @@ export default function Header() {
 						<Link href="#pricing" className="text-white font-medium transition-all duration-300 hover:text-cyan-400 cursor-pointer">
 							Pricing
 						</Link>
-						<Link href="#contact" className="text-white font-medium transition-all duration-300 hover:text-cyan-400 cursor-pointer">
-							Contact
-						</Link>
 					</div>
 				)}
 
@@ -60,7 +57,6 @@ export default function Header() {
 									userPreviewMainIdentifier: "font-semibold text-white",
 								},
 							}}
-							afterSignOutUrl="/"
 						/>
 					</Authenticated>
 

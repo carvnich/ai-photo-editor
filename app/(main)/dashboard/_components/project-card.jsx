@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { api } from "@/convex/_generated/api";
 import { useConvexMutation } from "@/hooks/use-convex-query";
 import { formatDistanceToNow } from "date-fns";
-import { Edit, Trash2 } from "lucide-react";
+import { Trash2 } from "lucide-react";
 import { toast } from "sonner";
 
 export default function ProjectCard({ project, onEdit }) {
@@ -29,28 +29,20 @@ export default function ProjectCard({ project, onEdit }) {
 	};
 
 	return (
-		<Card className="py-0 group relative bg-slate-800/50 overflow-hidden hover:border-white/20 transition-all hover:transform hover:scale-[1.02]">
+		<Card className="py-0 group relative bg-slate-800/50 overflow-hidden hover:border-white/20 transition-all hover:transform hover:scale-[1.02] cursor-pointer" onClick={onEdit}>
 			{/* Thumbnail */}
 			<div className="aspect-video bg-slate-700 relative overflow-hidden">
 				{project.thumbnailUrl && <img src={project.thumbnailUrl} alt={project.title} className="w-full h-full object-cover" />}
-
 				{/* Hover Actions */}
-				<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-					<Button variant="glass" size="sm" onClick={onEdit} className="gap-2">
-						<Edit className="h-4 w-4" />
-						Edit
-					</Button>
-					<Button variant="glass" size="sm" onClick={handleDelete} className="gap-2 text-red-400 hover:text-red-300" disabled={isLoading}>
-						<Trash2 className="h-4 w-4" />
-						Delete
+				<div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-start justify-end p-2">
+					<Button variant="glass" size="lg" onClick={handleDelete} className="bg-black/50 gap-2 text-red-400 hover:text-red-300 cursor-pointer" disabled={isLoading}>
+						<Trash2 className="h-6 w-6" />
 					</Button>
 				</div>
 			</div>
-
 			{/* Project Info */}
 			<CardContent className="pb-6">
 				<h3 className="font-semibold text-white mb-1 truncate">{project.title}</h3>
-
 				<div className="flex items-center justify-between text-sm text-white/70">
 					<span>Updated {lastUpdated}</span>
 					<Badge variant="secondary" className="text-xs bg-slate-700 text-white/70">

@@ -2,17 +2,12 @@ import { useIntersectionObserver } from "@/hooks/use-landing-hooks";
 import { useState } from "react";
 
 // Feature Card Component
-const FeatureCard = ({ icon, title, description, delay = 0 }) => {
-	const [ref, isVisible] = useIntersectionObserver();
+const FeatureCard = ({ icon, title, description }) => {
+	const [ref] = useIntersectionObserver();
 	const [isHovered, setIsHovered] = useState(false);
 
 	return (
-		<div
-			ref={ref}
-			className={`backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl p-8 transition-all duration-700 cursor-pointer ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} ${isHovered ? "transform scale-105 rotate-1 shadow-2xl" : ""}`}
-			style={{ transitionDelay: `${delay}ms` }}
-			onMouseEnter={() => setIsHovered(true)}
-			onMouseLeave={() => setIsHovered(false)}>
+		<div ref={ref} className={`backdrop-blur-lg bg-white/5 border border-white/10 rounded-2xl p-8 transition-all duration-700  ${isHovered ? "transform scale-105 rotate-1 shadow-2xl" : ""}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
 			<div className="text-4xl mb-4">{icon}</div>
 			<h3 className="text-xl font-bold text-white mb-3">{title}</h3>
 			<p className="text-gray-300 leading-relaxed">{description}</p>
@@ -65,7 +60,7 @@ const FeaturesSection = () => {
 
 				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
 					{features.map((feature, index) => (
-						<FeatureCard key={index} {...feature} delay={index * 100} />
+						<FeatureCard key={index} {...feature} />
 					))}
 				</div>
 			</div>

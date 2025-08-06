@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Button } from "./ui/button";
 
 const PricingCard = ({ id, plan, price, features, featured = false, planId, buttonText }) => {
-	const [ref, isVisible] = useIntersectionObserver();
+	const [ref] = useIntersectionObserver();
 	const [isHovered, setIsHovered] = useState(false);
 	const { has } = useAuth();
 
@@ -16,11 +16,7 @@ const PricingCard = ({ id, plan, price, features, featured = false, planId, butt
 
 		try {
 			if (window.Clerk && window.Clerk.__internal_openCheckout) {
-				await window.Clerk.__internal_openCheckout({
-					planId: planId,
-					planPeriod: "month",
-					subscriberType: "user",
-				});
+				await window.Clerk.__internal_openCheckout({ planId: planId, planPeriod: "month", subscriberType: "user" });
 			}
 		} catch (error) {
 			console.error("Checkout error:", error);
@@ -30,7 +26,7 @@ const PricingCard = ({ id, plan, price, features, featured = false, planId, butt
 	return (
 		<div
 			ref={ref}
-			className={`relative backdrop-blur-lg border rounded-3xl p-8 transition-all duration-700 cursor-pointer ${featured ? "bg-gradient-to-b from-blue-500/20 to-purple-600/20 border-blue-400/50 scale-105" : "bg-white/5 border-white/10"} ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"} ${isHovered ? "transform scale-115 rotate-1 z-10" : ""}`}
+			className={`relative backdrop-blur-lg border rounded-3xl p-8 transition-all duration-700 cursor-pointer ${featured ? "bg-gradient-to-b from-blue-500/20 to-purple-600/20 border-blue-400/50 scale-105" : "bg-white/5 border-white/10"} ${isHovered ? "transform scale-115 rotate-1 z-10" : ""}`}
 			onMouseEnter={() => setIsHovered(true)}
 			onMouseLeave={() => setIsHovered(false)}>
 			{featured && (
@@ -71,15 +67,15 @@ const PricingSection = () => {
 			plan: "Free",
 			price: 0,
 			features: ["3 projects maximum", "20 exports per month", "Basic crop & resize", "Color adjustments", "Text Tool"],
-			buttonText: "Get Started Free",
+			buttonText: "Get Started for Free",
 		},
 		{
 			id: "pro",
 			plan: "Pro",
-			price: 12,
+			price: 5,
 			features: ["Unlimited projects", "Unlimited exports", "All Editing Tools", "AI Background Remover", "AI Image Extender", "AI Retouch, Upscaler and more"],
 			featured: true,
-			planId: "cplan_2ywZwXjYQQipWYxjCmFZCgCgsTZ",
+			planId: "cplan_30uzXdpyjXZKBdnl4zBPx3XMGbu",
 			buttonText: "Upgrade to Pro",
 		},
 	];

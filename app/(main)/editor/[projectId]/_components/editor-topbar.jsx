@@ -113,6 +113,7 @@ export function EditorTopBar({ project }) {
 			if (newStack.length > 20) {
 				newStack.shift();
 			}
+
 			return newStack;
 		});
 
@@ -240,10 +241,7 @@ export function EditorTopBar({ project }) {
 
 		try {
 			const canvasJSON = canvasEditor.toJSON();
-			await updateProject({
-				projectId: project._id,
-				canvasState: canvasJSON,
-			});
+			await updateProject({ projectId: project._id, canvasState: canvasJSON });
 			toast.success("Project saved successfully!");
 		} catch (error) {
 			console.error("Error saving project:", error);
@@ -276,10 +274,7 @@ export function EditorTopBar({ project }) {
 			// Reset zoom and viewport for accurate export
 			canvasEditor.setZoom(1);
 			canvasEditor.setViewportTransform([1, 0, 0, 1, 0, 0]);
-			canvasEditor.setDimensions({
-				width: project.width,
-				height: project.height,
-			});
+			canvasEditor.setDimensions({ width: project.width, height: project.height });
 			canvasEditor.requestRenderAll();
 
 			// Export the canvas
@@ -292,10 +287,7 @@ export function EditorTopBar({ project }) {
 			// Restore original canvas state
 			canvasEditor.setZoom(currentZoom);
 			canvasEditor.setViewportTransform(currentViewportTransform);
-			canvasEditor.setDimensions({
-				width: project.width * currentZoom,
-				height: project.height * currentZoom,
-			});
+			canvasEditor.setDimensions({ width: project.width * currentZoom, height: project.height * currentZoom });
 			canvasEditor.requestRenderAll();
 
 			// Download the image

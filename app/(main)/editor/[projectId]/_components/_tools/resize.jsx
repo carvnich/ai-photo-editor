@@ -46,10 +46,7 @@ export function ResizeControls({ project }) {
 		const newHeight = Math.sqrt(originalArea / aspectRatio);
 		const newWidth = newHeight * aspectRatio;
 
-		return {
-			width: Math.round(newWidth),
-			height: Math.round(newHeight),
-		};
+		return { width: Math.round(newWidth), height: Math.round(newHeight) };
 	};
 
 	// Handle width change with aspect ratio lock
@@ -61,6 +58,7 @@ export function ResizeControls({ project }) {
 			const ratio = project.height / project.width;
 			setNewHeight(Math.round(width * ratio));
 		}
+
 		setSelectedPreset(null);
 	};
 
@@ -73,6 +71,7 @@ export function ResizeControls({ project }) {
 			const ratio = project.width / project.height;
 			setNewWidth(Math.round(height * ratio));
 		}
+
 		setSelectedPreset(null);
 	};
 
@@ -111,25 +110,14 @@ export function ResizeControls({ project }) {
 			// Calculate and apply viewport scale
 			const viewportScale = calculateViewportScale();
 
-			canvasEditor.setDimensions(
-				{
-					width: newWidth * viewportScale,
-					height: newHeight * viewportScale,
-				},
-				{ backstoreOnly: false }
-			);
+			canvasEditor.setDimensions({ width: newWidth * viewportScale, height: newHeight * viewportScale }, { backstoreOnly: false });
 
 			canvasEditor.setZoom(viewportScale);
 			canvasEditor.calcOffset();
 			canvasEditor.requestRenderAll();
 
 			// Update project in database
-			await updateProject({
-				projectId: project._id,
-				width: newWidth,
-				height: newHeight,
-				canvasState: canvasEditor.toJSON(),
-			});
+			await updateProject({ projectId: project._id, width: newWidth, height: newHeight, canvasState: canvasEditor.toJSON() });
 		} catch (error) {
 			console.error("Error resizing canvas:", error);
 			alert("Failed to resize canvas. Please try again.");

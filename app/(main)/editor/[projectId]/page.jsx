@@ -34,6 +34,7 @@ export default function EditorPage() {
 		);
 	}
 
+	// Handle project not found or access denied
 	if (error || !project) {
 		return (
 			<div className="min-h-screen bg-slate-900 flex items-center justify-center">
@@ -46,15 +47,7 @@ export default function EditorPage() {
 	}
 
 	return (
-		<CanvasContext.Provider
-			value={{
-				canvasEditor,
-				setCanvasEditor,
-				activeTool,
-				onToolChange: setActiveTool,
-				processingMessage,
-				setProcessingMessage,
-			}}>
+		<CanvasContext.Provider value={{ canvasEditor, setCanvasEditor, activeTool, onToolChange: setActiveTool, processingMessage, setProcessingMessage }}>
 			{/* Mobile Message - Show on screens smaller than lg (1024px) */}
 			<div className="lg:hidden min-h-screen bg-slate-900 flex items-center justify-center p-6">
 				<div className="text-center max-w-md">
@@ -64,7 +57,6 @@ export default function EditorPage() {
 					<p className="text-white/50 text-sm">Please use a larger screen to access the full editing experience.</p>
 				</div>
 			</div>
-
 			{/* Desktop Editor - Show on lg screens and above */}
 			<div className="hidden lg:block min-h-screen bg-slate-900">
 				<div className="flex flex-col h-screen">
@@ -79,15 +71,12 @@ export default function EditorPage() {
 							</div>
 						</div>
 					)}
-
 					{/* Top Bar */}
 					<EditorTopBar project={project} />
-
 					{/* Main Editor Layout */}
 					<div className="flex flex-1 overflow-hidden">
 						{/* Sidebar */}
 						<EditorSidebar project={project} />
-
 						{/* Canvas Area */}
 						<div className="flex-1 bg-slate-800">
 							<CanvasEditor project={project} activeTool={activeTool} />
