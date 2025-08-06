@@ -60,7 +60,7 @@ export function EditorSidebar({ project }) {
 	const Icon = toolConfig.icon;
 
 	return (
-		<div className="min-w-96 border-r flex flex-col">
+		<div className="w-96 border-r flex flex-col">
 			{/* Sidebar Header */}
 			<div className="p-4 border-b">
 				<div className="flex items-center gap-3">
@@ -69,7 +69,6 @@ export function EditorSidebar({ project }) {
 				</div>
 				<p className="text-sm text-white mt-1">{toolConfig.description}</p>
 			</div>
-
 			{/* Sidebar Content */}
 			<div className="flex-1 p-4 overflow-y-scroll">{renderToolContent(activeTool, project)}</div>
 		</div>

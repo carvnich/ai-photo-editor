@@ -45,13 +45,7 @@ function CanvasEditor({ project }) {
 			});
 
 			// Sync both lower and upper canvas layers
-			canvas.setDimensions(
-				{
-					width: project.width * viewportScale,
-					height: project.height * viewportScale,
-				},
-				{ backstoreOnly: false }
-			);
+			canvas.setDimensions({ width: project.width * viewportScale, height: project.height * viewportScale }, { backstoreOnly: false });
 
 			canvas.setZoom(viewportScale);
 
@@ -67,9 +61,7 @@ function CanvasEditor({ project }) {
 			if (project.currentImageUrl || project.originalImageUrl) {
 				try {
 					const imageUrl = project.currentImageUrl || project.originalImageUrl;
-					const fabricImage = await FabricImage.fromURL(imageUrl, {
-						crossOrigin: "anonymous",
-					});
+					const fabricImage = await FabricImage.fromURL(imageUrl, { crossOrigin: "anonymous" });
 
 					const imgAspectRatio = fabricImage.width / fabricImage.height;
 					const canvasAspectRatio = project.width / project.height;
@@ -138,10 +130,7 @@ function CanvasEditor({ project }) {
 
 		try {
 			const canvasJSON = canvasEditor.toJSON();
-			await updateProject({
-				projectId: project._id,
-				canvasState: canvasJSON,
-			});
+			await updateProject({ projectId: project._id, canvasState: canvasJSON });
 		} catch (error) {
 			console.error("Error saving canvas state:", error);
 		}
@@ -189,13 +178,7 @@ function CanvasEditor({ project }) {
 			if (!canvasEditor || !project) return;
 
 			const newScale = calculateViewportScale();
-			canvasEditor.setDimensions(
-				{
-					width: project.width * newScale,
-					height: project.height * newScale,
-				},
-				{ backstoreOnly: false }
-			);
+			canvasEditor.setDimensions({ width: project.width * newScale, height: project.height * newScale }, { backstoreOnly: false });
 			canvasEditor.setZoom(newScale);
 			canvasEditor.calcOffset();
 			canvasEditor.requestRenderAll();
@@ -231,10 +214,10 @@ function CanvasEditor({ project }) {
 				className="absolute inset-0 opacity-10 pointer-events-none"
 				style={{
 					backgroundImage: `
-            linear-gradient(45deg, #64748b 25%, transparent 25%),
-            linear-gradient(-45deg, #64748b 25%, transparent 25%),
-            linear-gradient(45deg, transparent 75%, #64748b 75%),
-            linear-gradient(-45deg, transparent 75%, #64748b 75%)`,
+						linear-gradient(45deg, #64748b 25%, transparent 25%),
+						linear-gradient(-45deg, #64748b 25%, transparent 25%),
+						linear-gradient(45deg, transparent 75%, #64748b 75%),
+						linear-gradient(-45deg, transparent 75%, #64748b 75%)`,
 					backgroundSize: "20px 20px",
 					backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px",
 				}}

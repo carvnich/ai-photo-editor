@@ -6,7 +6,7 @@ import { useCanvas } from "@/context/context";
 import { api } from "@/convex/_generated/api";
 import { useConvexMutation } from "@/hooks/use-convex-query";
 import { Expand, Lock, Monitor, Unlock } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Common aspect ratios
 const ASPECT_RATIOS = [
@@ -24,15 +24,7 @@ export function ResizeControls({ project }) {
 	const [newHeight, setNewHeight] = useState(project?.height || 600);
 	const [lockAspectRatio, setLockAspectRatio] = useState(true);
 	const [selectedPreset, setSelectedPreset] = useState(null);
-
-	const { mutate: updateProject, data, isLoading } = useConvexMutation(api.projects.updateProject);
-
-	useEffect(() => {
-		if (!isLoading && data) {
-			window.location.reload();
-		}
-	}),
-		[data, isLoading];
+	const { mutate: updateProject } = useConvexMutation(api.projects.updateProject);
 
 	// Calculate dimensions for aspect ratio based on original canvas size
 	const calculateAspectRatioDimensions = (ratio) => {
